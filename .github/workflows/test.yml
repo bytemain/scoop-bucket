@@ -14,9 +14,8 @@ jobs:
         run: |
           iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
           $env:PATH = "$env:USERPROFILE\scoop\shims;$env:PATH"
-          scoop bucket add bytemain "$PWD"
           Get-ChildItem bucket/*.json | ForEach-Object {
-            scoop install "bytemain/$($_.BaseName)"
+            scoop install $_.FullName
             if ($LASTEXITCODE) { exit 1 }
           }
           prog --version
