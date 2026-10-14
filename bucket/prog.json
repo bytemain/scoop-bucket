@@ -1,0 +1,25 @@
+{
+    "version": "0.1.0",
+    "description": "Manage git repositories by path rules and find them by keyword",
+    "homepage": "https://github.com/bytemain/prog",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/bytemain/prog/releases/download/v0.1.0/prog-x86_64-pc-windows-msvc.zip",
+            "hash": "9d3f05200946300daea683995f9b9e51243a5687c7863f746ae02f9bbcab3cdb",
+            "extract_dir": "prog-x86_64-pc-windows-msvc"
+        }
+    },
+    "bin": "prog.exe",
+    "checkver": "github",
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/bytemain/prog/releases/download/v$version/prog-x86_64-pc-windows-msvc.zip",
+                "hash": {
+                    "url": "$url.sha256"
+                },
+                "extract_dir": "prog-x86_64-pc-windows-msvc"
+            }
+        }
+    }
+}

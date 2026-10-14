@@ -1,0 +1,22 @@
+name: Test
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  install:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - shell: pwsh
+        run: |
+          iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
+          $env:PATH = "$env:USERPROFILE\scoop\shims;$env:PATH"
+          scoop bucket add bytemain "$PWD"
+          Get-ChildItem bucket/*.json | ForEach-Object {
+            scoop install "bytemain/$($_.BaseName)"
+            if ($LASTEXITCODE) { exit 1 }
+          }
+          prog --version
